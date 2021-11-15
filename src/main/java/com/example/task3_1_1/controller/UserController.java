@@ -17,10 +17,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String mainPage() {
-        return "user/mainPage";
-    }
 
     @GetMapping("/user")
     public String getUserPage(ModelMap model, Principal principal) {
