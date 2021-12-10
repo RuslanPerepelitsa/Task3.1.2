@@ -45,7 +45,7 @@ public class AdminController {
     @GetMapping("/add")
     public String addUser(@ModelAttribute("user") User user, Model model) {
         List<Role> roles = roleService.getAllRoles();
-        model.addAttribute("allRoles", roles);
+        model.addAttribute("roles", roles);
         return "admin/addUser";
     }
 

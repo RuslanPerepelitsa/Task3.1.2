@@ -1,40 +1,80 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add user</title>
+    <meta charset="utf-8"/>
+    <title>Add User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+    html, body {
+        height: 100%;
+    }
+</style>
+<div class="modal" tabindex="-1" role="dialog" id="myEdit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" th:action="@{/admin/add}" th:object="${user}" method="post">
 
-<form th:method="POST" th:action="@{/admin/add}" th:object="${user}">
-    <label for="username">Username: </label>
-    <input type="text" th:field="*{username}" id="username"/>
-    <br>
-    <label for="firstName">First name: </label>
-    <input type="text" th:field="*{firstName}" id="firstName"/>
-    <br>
-    <label for="lastName">Last name: </label>
-    <input type="text" th:field="*{lastName}" id="lastName"/>
-    <br>
-    <label for="email">Email: </label>
-    <input type="text" th:field="*{email}" id="email"/>
-    <br>
-    <label for="password">Password: </label>
-    <input type="text" th:field="*{password}" id="password"/>
-    <br>
-    <label>Enter role:</label>
-    <br>
-    <select th:name="idRoles" multiple="multiple">
-        <option th:each="role : ${allRoles}"
-                th:value="${role.id}"
-                th:selected="${role.getName().equals('ROLE_USER')}"
-                th:text="${role.getName().substring(5)}">
-        </option>
-    </select>
-    <input type="submit" value="Register">
-
-</form>
-
+                    <div class="form-group">
+                        <label for="username" class="control-label">Username</label><br>
+                        <input type="text" th:field="*{username}" id="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName" class="control-label">First Name</label><br>
+                        <input type="text" th:field="*{username}" id="firstName" placeholder="First name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="control-label">Last Name</label><br>
+                        <input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label><br>
+                        <input type="text" th:field="*{email}" id="email"
+                               placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label><br>
+                        <input type="text" th:field="*{password}" id="password"
+                               placeholder="Password">
+                    </div>
+                    <tr>
+                        <select th:name="idRoles" multiple class="form-control">
+                            <option th:each="role : ${roles}"
+                                    th:value="${role.getId()}"
+                                    th:selected="${role.getName().equals('ROLE_ADMIN')}"
+                                    th:text="${role.getName().substring(5)}">
+                            </option>
+                        </select>
+                    </tr>
+                    <br><br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input class="btn btn-primary" type="submit" value="Edit">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
