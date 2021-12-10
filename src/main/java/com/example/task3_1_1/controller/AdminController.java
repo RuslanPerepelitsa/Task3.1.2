@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,8 +28,11 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String getAllUsers(Model model) {
+    public String getAllUsers(Model model, Principal principal) {
+        User user = (User) userService.loadUserByUsername(principal.getName());
+        model.addAttribute("userAuthorized", user);
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/allUsers";
     }
 
@@ -66,7 +70,7 @@ public class AdminController {
     }
 
     @PutMapping("/{id}")
-    public String patchEditUser(@ModelAttribute User user, @RequestParam(value = "checkBoxRoles") String[] checkBoxRoles) {
+    public String putEditUser(@ModelAttribute User user, @RequestParam(value = "checkBoxRoles") String[] checkBoxRoles) {
         Set<Role> roles = new HashSet<>();
         for (String role : checkBoxRoles) {
             roles.add(roleService.getRoleByName(role));
