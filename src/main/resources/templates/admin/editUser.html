@@ -9,16 +9,16 @@
 
 </head>
 <body>
-<!-- Bootstrap CSS -->
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<!-- Latest compiled and minified CSS -->
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- jQuery library -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<!-- Latest compiled JavaScript -->
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
     html, body {
@@ -39,21 +39,22 @@
 
                     <div class="form-group">
                         <label for="username" class="control-label">Username</label><br>
-                        <input type="text" th:field="*{username}" id="username" placeholder="Username">
+                        <input type="text" th:field="*{username}" id="username" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="firstName" class="control-label">First name</label><br>
+                        <label for="username" class="control-label">First name</label><br>
                         <input type="text" th:field="*{firstName}" id="firstName" placeholder="First name">
                     </div>
                     <div class="form-group">
-                        <label for="lastName" class="control-label">Last name</label><br>
+                        <label for="username" class="control-label">Last name</label><br>
                         <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last name">
                     </div>
                     <div class="form-group">
                         <label for="email" class="control-label">Email</label><br>
                         <input type="text" th:field="*{email}" id="email"
-                               placeholder="Email">
+                               placeholder="Last Name">
                     </div>
+
                     <div class="form-group">
                         <label for="password" class="control-label">Password</label><br>
                         <input type="text" th:field="*{password}" id="password"
@@ -63,8 +64,8 @@
                         <th>Role:</th>
                         <td>
                             <select th:name="idRoles" multiple class="form-control">
-                                <option th:each="role : ${roles}"
-                                        th:value="${role.getId()}"
+                                <option th:each="role : ${listRoles}"
+                                        th:value="${role.id}"
                                         th:selected="${role.getName().equals('ROLE_ADMIN')}"
                                         th:text="${role.getName().substring(5)}">
                                 </option>
